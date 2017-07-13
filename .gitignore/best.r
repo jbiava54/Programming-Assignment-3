@@ -23,16 +23,14 @@ best <- function(state, outcome) {
        else if((outcome %in% outcomes) == FALSE) {
                 stop(print("Invalid Outcome"))
        }
-       else if ((state %in% states) == TRUE) && ((outcome %in% outcomes) == TRUE) {
-                        state_subset <- data_df[data_df[,2] == state,]
-                        outcome_subset <- state_subset[,outcome]
-                        calcmin <- min(outcome_subset, na.rm = TRUE)
-                       
-                       
-                        
-        }
-        minrow <- which(outcome_subset == calcmin)
-        hosp_name <- state_subset[minrow,1]        
+       else {
+                        state_subset <- data_df[data_df[,state] == state,]
+                        outcome_subset <- state_subset[, outcome]
+                        calcmin <- min(outcome_subset, na.rm = TRUE) 
+                        minrow <- which(outcome_subset == calcmin)
+       }
+   
+        hosp_name <- data_df[minrow,1]        
         return(hosp_name)
         ## create a function that finds the min of when you input a state and outcome
         
